@@ -1,0 +1,11 @@
+{
+  "name": "raw-node-practice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "serve" : "nodemon index"
+  },
+  "repository": "https://github.com/shihab-jamil/raw-node-practice.git",
+  "author": "Shihab jamil <shihab.jamil@enkaizen.com>",
+  "license": "MIT"
+}
