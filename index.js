@@ -1,36 +1,42 @@
 // dependencies
 const http = require('http')
-const url = require('url')
 
-
+const { handleReqRes } = require('./Helpers/HandleReqRes')
+const environments = require('./Helpers/environments')
+const data = require('./lib/data')
 //app module
 const app = {}
 
-// configuration
-app.config =  {
-    port : 3000
-}
+// testing file system write
+data.create('test', 'newFile', { 'name': 'Bangladesh', 'language': 'Bangla' }, (error) => {
+    console.log(`Error was ${error}`)
+})
+
+// testing file read
+data.read('test', 'newFile', (error, data) => {
+    console.log(error, data)
+})
+
+// testing file update
+data.update('test', 'newFile', { 'name': 'England', 'language': 'English' }, (error) => {
+    console.log(error)
+})
+
+// testing file delete
+data.delete('test', 'newFile', (error) => {
+    console.log(error)
+})
 
 //creating server
 app.createServer = () => {
     const server = http.createServer(app.handleReqRes)
-    server.listen(app.config.port, ()=> {
-        console.log(`Listening to port ${app.config.port}`);
+    server.listen(environments.port, () => {
+        console.log(`Listening to port ${environments.port}`);
     })
 }
-
 //handle request response
-app.handleReqRes = (req, res) => {
-    // parsing the url
-    const parsedUrl = url.parse(req.url, true)
-    const path = parsedUrl.pathname
-    const trimmedPath = path.replace(/^\/+|\/+$/g,'')
-    const method = req.method.toLowerCase()
-    const queryStringObjects = parsedUrl.query
-    const headerObject = req.headers
-    console.log(headerObject)
-    res.end('Hello world')
-}
+app.handleReqRes = handleReqRes
+
 
 // starting the server
 app.createServer()

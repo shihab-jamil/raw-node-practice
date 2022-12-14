@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "serve" : "nodemon index"
+    "start" : "NODE_ENV=staging nodemon index",
+    "production" : "NODE_ENV=production nodemon index"
   },
   "repository": "https://github.com/shihab-jamil/raw-node-practice.git",
   "author": "Shihab jamil <shihab.jamil@enkaizen.com>",
